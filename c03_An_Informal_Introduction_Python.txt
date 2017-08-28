@@ -1,0 +1,361 @@
+https://docs.python.org/2/tutorial/introduction.html
+
+3. An Informal Introduction to Python
+
++ Note that a secondary prompt on a line by itself in an example means you must type a blank line; this is used to end a multi-line command.
++ Comments in Python start with the hash character, #,
+
+# this is the first comment
+spam = 1  # and this is the second comment
+          # ... and now a third!
+text = "# This is not a comment because it's inside quotes."
+
+3.1. Using Python as a Calculator
+
+3.1.1. Numbers
+
++ expression
+
++ the operators +, -, * and / work just like in most other languages , parentheses (()) can be used for grouping. 
+
+>>> 2 + 2
+4
+>>> 50 - 5*6
+20
+>>> (50 - 5.0*6) / 4
+5.0
+>>> 8 / 5.0
+1.6
+
++ The integer numbers (e.g. 2, 4, 20) have type int, the ones with a fractional part (e.g. 5.0, 1.6) have type float.
+
++ The return type of a division (/) operation depends on its operands. 
+
++ The // operator is also provided for doing floor division no matter what the operands are.
+
++ The remainder can be calculated with the % operator:
+
+>>> 17 / 3  # int / int -> int
+5
+>>> 17 / 3.0  # int / float -> float
+5.666666666666667
+>>> 17 // 3.0  # explicit floor division discards the fractional part
+5.0
+>>> 17 % 3  # the % operator returns the remainder of the division
+2
+>>> 5 * 3 + 2  # result * divisor + remainder
+17
+
+>>> 5 ** 2  # 5 squared
+25
+>>> 2 ** 7  # 2 to the power of 7
+128
+
+>>> width = 20
+>>> height = 5 * 9
+>>> width * height
+900
+
++ If a variable is not “defined” (assigned a value), trying to use it will give you an error:
+
+>>> n  # try to access an undefined variable
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'n' is not defined
+
+
+>>> 3 * 3.75 / 1.5
+7.5
+>>> 7.0 / 2
+3.5
+
+>>> tax = 12.5 / 100
+>>> price = 100.50
+>>> price * tax
+12.5625
+>>> price + _
+113.0625
+>>> round(_, 2)
+113.06
+
++ In addition to int and float, Python supports other types of numbers, such as Decimal and Fraction. Python also has built-in support for complex numbers, and uses the j or J suffix to indicate the imaginary part (e.g. 3+5j).
+
+3.1.2. Strings
+
++ They can be enclosed in single quotes ('...') or double quotes ("...") with the same result [2]. \ can be used to escape quotes:
+
+>>> 'spam eggs'  # single quotes
+'spam eggs'
+>>> 'doesn\'t'  # use \' to escape the single quote...
+"doesn't"
+>>> "doesn't"  # ...or use double quotes instead
+"doesn't"
+>>> '"Yes," he said.'
+'"Yes," he said.'
+>>> "\"Yes,\" he said."
+'"Yes," he said.'
+>>> '"Isn\'t," she said.'
+'"Isn\'t," she said.'
+
++ The print statement produces a more readable output, by omitting the enclosing quotes and by printing escaped and special characters:
+
+>>> '"Isn\'t," she said.'
+'"Isn\'t," she said.'
+>>> print '"Isn\'t," she said.'
+"Isn't," she said.
+>>> s = 'First line.\nSecond line.'  # \n means newline
+>>> s  # without print, \n is included in the output
+'First line.\nSecond line.'
+>>> print s  # with print, \n produces a new line
+First line.
+Second line.
+
++ If you don’t want characters prefaced by \ to be interpreted as special characters, you can use raw strings by adding an r before the first quote:
+
+
+>>> print 'C:\some\name'  # here \n means newline!
+C:\some
+ame
+>>> print r'C:\some\name'  # note the r before the quote
+C:\some\name
+
++  One way is using triple-quotes: """...""" or '''...'''. End of lines are automatically included in the string, but it’s possible to prevent this by adding a \ at the end of the line. 
+
+print """\
+Usage: thingy [OPTIONS]
+     -h                        Display this usage message
+     -H hostname               Hostname to connect to
+"""
+
++ Strings can be concatenated (glued together) with the + operator, and repeated with *:
+
+>>> # 3 times 'un', followed by 'ium'
+>>> 3 * 'un' + 'ium'
+'unununium'
+
++ Two or more string literals (i.e. the ones enclosed between quotes) next to each other are automatically concatenated.
+
+>>> 'Py' 'thon'
+'Python'
+
++ This only works with two literals though, not with variables or expressions:
+
+>>> prefix = 'Py'
+>>> prefix 'thon'  # can't concatenate a variable and a string literal
+  ...
+SyntaxError: invalid syntax
+>>> ('un' * 3) 'ium'
+  ...
+SyntaxError: invalid syntax
+
++ If you want to concatenate variables or a variable and a literal, use +:
+
+>>> prefix + 'thon'
+'Python'
+
+This feature is particularly useful when you want to break long strings:
+
+>>> text = ('Put several strings within parentheses '
+...         'to have them joined together.')
+>>> text
+'Put several strings within parentheses to have them joined together.'
+
++ Strings can be indexed (subscripted), with the first character having index 0. There is no separate character type; a character is simply a string of size one:
+
+>>> word = 'Python'
+>>> word[0]  # character in position 0
+'P'
+>>> word[5]  # character in position 5
+'n'
+
++ Indices may also be negative numbers, to start counting from the right:
+
+>>> word[-1]  # last character
+'n'
+>>> word[-2]  # second-last character
+'o'
+>>> word[-6]
+'P'
+
++ In addition to indexing, slicing is also supported. While indexing is used to obtain individual characters, slicing allows you to obtain a substring:
+
+>>> word[0:2]  # characters from position 0 (included) to 2 (excluded)
+'Py'
+>>> word[2:5]  # characters from position 2 (included) to 5 (excluded)
+'tho'
+
++ This makes sure that s[:i] + s[i:] is always equal to s:
+
+>>> word[:2] + word[2:]
+'Python'
+>>> word[:4] + word[4:]
+'Python'
+
++ Slice indices have useful defaults; an omitted first index defaults to zero, an omitted second index defaults to the size of the string being sliced.
+
+>>> word[:2]   # character from the beginning to position 2 (excluded)
+'Py'
+>>> word[4:]   # characters from position 4 (included) to the end
+'on'
+>>> word[-2:]  # characters from the second-last (included) to the end
+'on'
+
++ Attempting to use an index that is too large will result in an error:
+
+>>> word[42]  # the word only has 6 characters
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: string index out of range
+
++ However, out of range slice indexes are handled gracefully when used for slicing:
+
+>>> word[4:42]
+'on'
+>>> word[42:]
+''
+
++ Python strings cannot be changed — they are immutable. Therefore, assigning to an indexed position in the string results in an error:
+
+>>> word[0] = 'J'
+  ...
+TypeError: 'str' object does not support item assignment
+>>> word[2:] = 'py'
+  ...
+TypeError: 'str' object does not support item assignment
+
++ If you need a different string, you should create a new one:
+
+>>> 'J' + word[1:]
+'Jython'
+>>> word[:2] + 'py'
+'Pypy'
+
++ The built-in function len() returns the length of a string:
+
+>>> s = 'supercalifragilisticexpialidocious'
+>>> len(s)
+34
+
++ See also
+Sequence Types — str, unicode, list, tuple, bytearray, buffer, xrange
+Strings, and the Unicode strings described in the next section, are examples of sequence types, and support the common operations supported by such types.
+String Methods
+Both strings and Unicode strings support a large number of methods for basic transformations and searching.
+Format String Syntax
+Information about string formatting with str.format().
+String Formatting Operations
+The old formatting operations invoked when strings and Unicode strings are the left operand of the % operator are described in more detail here.
+
+3.1.3. Unicode Strings¶
+
+3.1.4. Lists
+
++ Lists might contain items of different types, but usually the items all have the same type.
+
+>>> squares = [1, 4, 9, 16, 25]
+>>> squares
+[1, 4, 9, 16, 25]
+
++ Like strings (and all other built-in sequence type), lists can be indexed and sliced:
+
++ >>> squares[0]  # indexing returns the item
+1
+>>> squares[-1]
+25
+>>> squares[-3:]  # slicing returns a new list
+[9, 16, 25]
+
+>>> squares[:]
+[1, 4, 9, 16, 25]
+
+>>> squares + [36, 49, 64, 81, 100]
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+ lists are a mutable type, i.e. it is possible to change their content:
+
+>>> cubes = [1, 8, 27, 65, 125]  # something's wrong here
+>>> 4 ** 3  # the cube of 4 is 64, not 65!
+64
+>>> cubes[3] = 64  # replace the wrong value
+>>> cubes
+[1, 8, 27, 64, 125]
+
++ You can also add new items at the end of the list, by using the append() method (we will see more about methods later):
+
+>>> cubes.append(216)  # add the cube of 6
+>>> cubes.append(7 ** 3)  # and the cube of 7
+>>> cubes
+[1, 8, 27, 64, 125, 216, 343]
+
++ Assignment to slices is also possible, and this can even change the size of the list or clear it entirely:
+
+>>> letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+>>> letters
+['a', 'b', 'c', 'd', 'e', 'f', 'g']
+>>> # replace some values
+>>> letters[2:5] = ['C', 'D', 'E']
+>>> letters
+['a', 'b', 'C', 'D', 'E', 'f', 'g']
+>>> # now remove them
+>>> letters[2:5] = []
+>>> letters
+['a', 'b', 'f', 'g']
+>>> # clear the list by replacing all the elements with an empty list
+>>> letters[:] = []
+>>> letters
+[]
+
++ The built-in function len() also applies to lists:
+
+>>> letters = ['a', 'b', 'c', 'd']
+>>> len(letters)
+4
+
++ It is possible to nest lists (create lists containing other lists), for example:
+
+>>> a = ['a', 'b', 'c']
+>>> n = [1, 2, 3]
+>>> x = [a, n]
+>>> x
+[['a', 'b', 'c'], [1, 2, 3]]
+>>> x[0]
+['a', 'b', 'c']
+>>> x[0][1]
+'b'
+
+3.2. First Steps Towards Programming¶
+
++ For instance, we can write an initial sub-sequence of the Fibonacci series as follows:
+
+>>> # Fibonacci series:
+... # the sum of two elements defines the next
+... a, b = 0, 1
+>>> while b < 10:
+...     print b
+...     a, b = b, a+b
+...
+1
+1
+2
+3
+5
+8
+
++ This example introduces several new features.
+
++ A trailing comma avoids the newline after the output:
+
+>>> a, b = 0, 1
+>>> while b < 1000:
+...     print b,
+...     a, b = b, a+b
+...
+1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
+
++ Footnotes
+
+[1]	Since ** has higher precedence than -, -3**2 will be interpreted as -(3**2) and thus result in -9. To avoid this and get 9, you can use (-3)**2.
+[2]	Unlike other languages, special characters such as \n have the same meaning with both single ('...') and double ("...") quotes. The only difference between the two is that within single quotes you don’t need to escape " (but you have to escape \') and vice versa.
+
+.txt
+

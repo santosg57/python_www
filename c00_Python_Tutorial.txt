@@ -1,0 +1,34 @@
+https://docs.python.org/2/tutorial/index.html
+
+TT The Python Tutorial
+
++ easy to learn
++ powerful programming language
++ efficient high-level data structures
++ a simple but effective approach to object-oriented programming. 
++ Python’s elegant syntax and dynamic typing
+
++ https://www.python.org/
+
++ basic concepts and features of the Python language and system.
++ It helps to have a Python interpreter handy for hands-on experience
+
++ see The Python Standard Library. 
+
++ The Python Standard Library.
+
+>> 1. Whetting Your Appetite
+
++ some task you’d like to automate. 
++ For example, you may wish to perform a search-and-replace over a large number of text files, or rename and rearrange a bunch of photo files in a complicated way. 
++ to write a small custom database, or a specialized GUI application, or a simple game.
+
++ the high-level data types allow you to express complex operations in a single statement;
++ statement grouping is done by indentation instead of beginning and ending brackets;
++ no variable or argument declarations are necessary.
+
++ By the way, the language is named after the BBC show “Monty Python’s Flying Circus” and has nothing to do with reptiles. Making references to Monty Python skits in documentation is not only allowed, it is encouraged!
+
+
+
+

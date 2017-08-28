@@ -1,0 +1,39 @@
+https://docs.python.org/2/tutorial/interpreter.html
+
+2. Using the Python Interpreter
+2.1. Invoking the Interpreter
+
++ /usr/local/bin/python 
++ /usr/local/bin 
+
++ Some Python modules are also useful as scripts. These can be invoked using python -m module [arg] ..., which executes the source file for module as if you had spelled out its full name on the command line.
+
+
+>> 2.1.1. Argument Passing
+
++ the script name and additional arguments thereafter are turned into a list of strings and assigned to the argv variable in the sys module. You can access this list by executing import sys. 
+
+>> 2.1.2. Interactive Mode
+
++ When commands are read from a tty, the interpreter is said to be in interactive mode. 
+
++ Continuation lines are needed when entering a multi-line construct.
+
+>>> the_world_is_flat = 1
+>>> if the_world_is_flat:
+...     print "Be careful not to fall off!"
+...
+Be careful not to fall off!
+
+2.2. The Interpreter and Its Environment
+2.2.1. Source Code Encoding
+
++ By default, Python source files are treated as encoded in UTF-8.
+
++ To declare an encoding other than the default one, a special comment line should be added as the first line of the file. The syntax is as follows:
+
+# -*- coding: encoding -*-
+
+
+
+
